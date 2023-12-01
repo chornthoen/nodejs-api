@@ -6,9 +6,16 @@ const getAllBrands = (req, res) => {
         pool.query(brandService.getAllBrands, (err, result) => {
             if (err) throw err;
             if (result.rows.length === 0) {
-                return res.status(404).json({success: false, message: 'No data found'});
+                return res.status(404).json({
+                    success: false,
+                    message: 'No data found'
+                });
             }
-            res.status(200).json({success: true, message: 'successfully', data: result.rows});
+            res.status(200).json({
+                success: true,
+                message: 'successfully',
+                data: result.rows
+            });
         });
     } catch (err) {
         res.status(500).json(err);
@@ -19,16 +26,27 @@ const getBrandById = (req, res) => {
     pool.query(brandService.getBrandById, [id], (err, result) => {
         if (err) throw err;
         if (result.rows.length === 0) {
-            return res.status(404).json({success: false, message: 'No data found'});
+            return res.status(404).json({
+                success: false,
+                message: 'No data found'
+            });
         }
-        res.status(200).json({success: true, message: 'successfully', data: result.rows});
+        res.status(200).json({
+            success: true,
+            message: 'successfully',
+            data: result.rows
+        });
     });
 }
 const createBrand = (req, res) => {
     const {model, name} = req.body;
     pool.query(brandService.createBrand, [model, name], (err, result) => {
         if (err) throw err;
-        res.status(201).json({success: true, message: 'successfully', data: result.rows});
+        res.status(201).json({
+            success: true,
+            message: 'successfully',
+            data: result.rows
+        });
     });
 }
 
@@ -38,9 +56,16 @@ const updateBrand = (req, res) => {
     pool.query(brandService.updateBrand, [id, model, name], (err, result) => {
         if (err) throw err;
         if (result.rows.length === 0) {
-            return res.status(404).json({success: false, message: 'No data found'});
+            return res.status(404).json({
+                success: false,
+                message: 'No data found'
+            });
         }
-        res.status(200).json({success: true, message: 'successfully', data: result.rows});
+        res.status(200).json({
+            success: true,
+            message: 'successfully',
+            data: result.rows
+        });
     });
 }
 const deleteBrand = (req, res) => {
@@ -48,9 +73,15 @@ const deleteBrand = (req, res) => {
     pool.query(brandService.deleteBrand, [id], (err, result) => {
         if (err) throw err;
         if (result.rows.length === 0) {
-            return res.status(404).json({success: false, message: 'No data found'});
+            return res.status(404).json({
+                success: false,
+                message: 'No data found'
+            });
         }
-        res.status(200).json({success: true, message: 'successfully'});
+        res.status(200).json({
+            success: true,
+            message: 'successfully'
+        });
     });
 }
 
