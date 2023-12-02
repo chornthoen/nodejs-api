@@ -10,7 +10,7 @@ const port = 3001;
 app.use(express.json());
 
 app.use('/api/v1/brands', brandRoutes);
-app.use('/api/v1/users',userRoutes);
+app.use('/api/v1/users', userRoutes);
 
 
 
