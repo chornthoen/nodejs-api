@@ -7,6 +7,7 @@ const getAllUsers = (req, res) => {
             if (err) throw err;
             if (result.rows.length === 0) {
                 return res.status(404).json({success: false, message: 'No data found'});
+
             }
             res.status(200).json({
                 success: true,
