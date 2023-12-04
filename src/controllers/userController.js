@@ -15,8 +15,7 @@ const getAllUsers = (req, res) => {
         const response = {
             success: true,
             message: 'Successfully',
-            data: resultUser,
-            pagination: {
+            data: resultUser, pagination: {
                 totalElements: totalElements,
                 totalPages: totalPages,
                 prevPage: prevPage,
@@ -27,8 +26,7 @@ const getAllUsers = (req, res) => {
         if (err) throw err;
         if (result.rows.length === 0) {
             return res.status(404).json({
-                success: false,
-                message: 'No data found'
+                success: false, message: 'No data found'
             });
 
         }
@@ -44,9 +42,7 @@ const getUserById = (req, res) => {
             res.status(404).json({success: false, message: 'Not found user'})
         }
         res.status(200).json({
-            success: true,
-            message: 'Successfully',
-            data: result.rows,
+            success: true, message: 'Successfully', data: result.rows,
         })
     })
 }
@@ -56,9 +52,7 @@ const createUser = (req, res) => {
     pool.query(userService.createUser, [name, phone], (err, result) => {
         if (err) throw err;
         res.status(200).json({
-            success: true,
-            message: 'Created user successfully!',
-            data: result.rows,
+            success: true, message: 'Created user successfully!', data: result.rows,
         })
     })
 }
@@ -69,14 +63,11 @@ const updateUser = (req, res) => {
         if (err) throw err;
         if (result.rows.length === 0) {
             res.status(404).json({
-                success: false,
-                message: 'Not found user'
+                success: false, message: 'Not found user'
             })
         }
         res.status(200).json({
-            success: true,
-            message: 'Updated user successfully!',
-            data: result.rows
+            success: true, message: 'Updated user successfully!', data: result.rows
         })
     })
 }
@@ -87,22 +78,16 @@ const deleteUser = (req, res) => {
         if (err) throw err;
         if (result.rows.length === 0) {
             res.status(404).json({
-                success: false,
-                message: 'Not found user',
+                success: false, message: 'Not found user',
             })
         }
         res.status(200).json({
-            success: true,
-            message: 'Deleted user successfully!!'
+            success: true, message: 'Deleted user successfully!!'
         })
     })
 }
 
 
 module.exports = {
-    getAllUsers,
-    getUserById,
-    createUser,
-    updateUser,
-    deleteUser,
+    getAllUsers, getUserById, createUser, updateUser, deleteUser,
 }

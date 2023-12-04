@@ -13,7 +13,6 @@ app.use('/api/v1/brands', brandRoutes);
 app.use('/api/v1/users', userRoutes);
 
 
-
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}...`);
 });
