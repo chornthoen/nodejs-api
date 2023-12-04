@@ -8,14 +8,6 @@ const getAllUsers = (req, res) => {
     const end = page * limit;
     pool.query(userService.getAllUsers, (err, result) => {
         const resultUser = result.rows.slice(start, end)
-        if (err) throw err;
-        if (result.rows.length === 0) {
-            return res.status(404).json({
-                success: false,
-                message: 'No data found'
-            });
-
-        }
         const totalElements = result.rows.length;
         const totalPages = Math.ceil(totalElements / limit);
         const prevPage = page > 1 ? page - 1 : null;
@@ -31,6 +23,14 @@ const getAllUsers = (req, res) => {
                 nextPage: nextPage,
                 currentPage: page,
             }
+        }
+        if (err) throw err;
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'No data found'
+            });
+
         }
         res.status(200).json(response);
     });
