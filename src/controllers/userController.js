@@ -1,5 +1,6 @@
 const userService = require('../services/userService')
 const pool = require('../config/dbConfig')
+const UserDto = require('../dto/UserDTO')
 
 const getAllUsers = (req, res) => {
     const page = parseInt(req.query.page);
@@ -15,7 +16,8 @@ const getAllUsers = (req, res) => {
         const response = {
             success: true,
             message: 'Successfully',
-            data: resultUser, pagination: {
+            data: resultUser,
+            pagination: {
                 totalElements: totalElements,
                 totalPages: totalPages,
                 prevPage: prevPage,
@@ -46,13 +48,17 @@ const getUserById = (req, res) => {
         })
     })
 }
-
 const createUser = (req, res) => {
     const {name, phone} = req.body;
     pool.query(userService.createUser, [name, phone], (err, result) => {
         if (err) throw err;
         res.status(200).json({
-            success: true, message: 'Created user successfully!', data: result.rows,
+            success: true,
+            message: 'Created user successfully!',
+            data: {
+                name: result.rows[0].name,
+                phone: result.rows[0].phone,
+            }
         })
     })
 }
@@ -67,11 +73,15 @@ const updateUser = (req, res) => {
             })
         }
         res.status(200).json({
-            success: true, message: 'Updated user successfully!', data: result.rows
+            success: true,
+            message: 'Updated user successfully!',
+            data: {
+                name: result.rows[0].name,
+                phone: result.rows[0].phone,
+            }
         })
     })
 }
-
 const deleteUser = (req, res) => {
     const id = parseInt(req.params.id);
     pool.query(userService.deleteUser, [id], (err, result) => {
