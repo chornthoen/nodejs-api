@@ -1,6 +1,5 @@
 const userService = require('../services/userService')
 const pool = require('../config/dbConfig')
-const UserDto = require('../dto/UserDTO')
 
 const getAllUsers = (req, res) => {
     const page = parseInt(req.query.page);
@@ -41,10 +40,15 @@ const getUserById = (req, res) => {
     pool.query(userService.getUserById, [id], (err, result) => {
         if (err) throw err
         if (result.rows.length === 0) {
-            res.status(404).json({success: false, message: 'Not found user'})
+            res.status(404).json({
+                success: false,
+                message: 'Not found user'
+            })
         }
         res.status(200).json({
-            success: true, message: 'Successfully', data: result.rows,
+            success: true,
+            message: 'Successfully',
+            data: result.rows,
         })
     })
 }
