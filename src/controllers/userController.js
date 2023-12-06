@@ -53,7 +53,7 @@ const getUserById = (req, res) => {
     })
 }
 const createUser = (req, res) => {
-    const {name, phone} = req.body;
+    const { name, phone } = req.body;
     pool.query(userService.createUser, [name, phone], (err, result) => {
         if (err) throw err;
         res.status(200).json({
@@ -68,12 +68,13 @@ const createUser = (req, res) => {
 }
 const updateUser = (req, res) => {
     const id = parseInt(req.params.id);
-    const {name, phone} = req.body;
+    const { name, phone } = req.body;
     pool.query(userService.updateUser, [id, name, phone], (err, result) => {
         if (err) throw err;
         if (result.rows.length === 0) {
             res.status(404).json({
-                success: false, message: 'Not found user'
+                success: false,
+                message: 'Not found user'
             })
         }
         res.status(200).json({
