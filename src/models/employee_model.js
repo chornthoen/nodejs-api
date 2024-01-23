@@ -1,4 +1,3 @@
-// src/models/employee_model.js
 
 const pool = require('../config/dbConfig');
 
@@ -16,9 +15,9 @@ const createEmployeeTable = async () => {
 
     try {
         await pool.query(createTableQuery);
-        console.log("Employee table created successfully");
     } catch (err) {
         console.error("An error occurred while creating the Employee table", err);
+        
     }
 }
 

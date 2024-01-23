@@ -1,5 +1,6 @@
 const brandService = require('../services/brandService');
 const pool = require('../config/dbConfig');
+import * as res from 'express/lib/response';
 
 const getAllBrands = (req, res) => {
     const page = parseInt(req.query.page);
@@ -49,6 +50,7 @@ const getBrandById = (req, res) => {
             success: true,
             message: 'successfully',
             data: result.rows
+        
         });
     });
 }
@@ -115,11 +117,14 @@ const searchBrand = (req, res) => {
         });
     });
 }
+
+
 module.exports = {
     getAllBrands,
     getBrandById,
     createBrand,
     updateBrand,
     deleteBrand,
-    searchBrand,
-};
+    searchBrand
+}
+
