@@ -1,6 +1,5 @@
 const brandService = require('../services/brandService');
 const pool = require('../config/dbConfig');
-import * as res from 'express/lib/response';
 
 const getAllBrands = (req, res) => {
     const page = parseInt(req.query.page);
