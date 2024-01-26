@@ -8,9 +8,11 @@ const employeeRoutes = require('./src/routes/employeeRoutes')
 //creat tables
 const createEmployeeTable = require('./src/models/employeeModel');
 const createUserTable = require('./src/models/userModel');
+const createProductsTable = require('./src/models/productModel');
 
 createEmployeeTable().then(r => console.log(r));
 createUserTable().then(r => console.log(r));
+createProductsTable().then(r => console.log(r));
 
 
 const app = express();
