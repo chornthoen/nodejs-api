@@ -6,5 +6,7 @@ const router = Router();
 
 router.route('/')
     .get(employeeController.getAllEmployees)
+router.route('/:id')
+    .get(employeeController.getEmployeeById)
 
 module.exports = router;

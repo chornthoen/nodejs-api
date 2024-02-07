@@ -36,6 +36,26 @@ const getAllEmployees = (req, res) => {
     });
 }
 
+//get employee by id
+const getEmployeeById = (req, res) => {
+    const id = parseInt(req.params.id);
+    pool.query(employeeService.getEmployeeById, [id], (err, result) => {
+        if (err) throw err;
+        if (result.rows.length === 0) {
+            return res.status(200).json({
+                success: true,
+                message: 'No data found',
+            });
+        }
+        res.status(200).json({
+            success: true,
+            message: 'Successfully',
+            data: result.rows[0],
+        });
+    });
+}
+
 module.exports = {
     getAllEmployees,
+    getEmployeeById,
 }

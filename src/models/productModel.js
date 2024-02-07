@@ -1,9 +1,10 @@
 
+
 const pool = require('../config/dbConfig');
 
-const createProductTable = async () => {
+const createProductsTable = async () => {
     const createTableQuery = `
-        CREATE TABLE IF NOT EXISTS product (
+        CREATE TABLE IF NOT EXISTS products (
             id SERIAL PRIMARY KEY,
             name VARCHAR(100),
             price DECIMAL(10, 2)
@@ -13,8 +14,8 @@ const createProductTable = async () => {
     try {
         await pool.query(createTableQuery);
     } catch (err) {
-        console.error("An error occurred while creating the Product table", err);
+        console.error("An error occurred while creating the User table", err);
     }
 }
 
-module.exports = createProductTable;
+module.exports = createProductsTable;
