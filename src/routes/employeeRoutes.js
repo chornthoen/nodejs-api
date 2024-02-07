@@ -6,6 +6,7 @@ const router = Router();
 
 router.route('/')
     .get(employeeController.getAllEmployees)
+    .post(employeeController.createEmployee)
 router.route('/:id')
     .get(employeeController.getEmployeeById)
 

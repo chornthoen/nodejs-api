@@ -4,14 +4,26 @@ const pool = require('../config/dbConfig')
 const getAllUsers = (req, res) => {
     const page = parseInt(req.query.page);
     const limit = parseInt(req.query.limit);
-    const start = (page - 1) * limit;
-    const end = page * limit;
+    let resultUser, totalElements, totalPages, prevPage, nextPage;
+
     pool.query(userService.getAllUsers, (err, result) => {
-        const resultUser = result.rows.slice(start, end)
-        const totalElements = result.rows.length;
-        const totalPages = Math.ceil(totalElements / limit);
-        const prevPage = page > 1 ? page - 1 : null;
-        const nextPage = page < totalPages ? page + 1 : null;
+
+        if (page && limit) {
+            const start = (page - 1) * limit;
+            const end = page * limit;
+             resultUser = result.rows.slice(start, end)
+             totalElements = result.rows.length;
+             totalPages = Math.ceil(totalElements / limit);
+             prevPage = page > 1 ? page - 1 : null;
+             nextPage = page < totalPages ? page + 1 : null;
+
+        } else {
+            resultUser = result.rows;
+            totalElements = result.rows.length;
+            totalPages = 1;
+            prevPage = null;
+            nextPage = null;
+        }
         const response = {
             success: true,
             message: 'Successfully',
@@ -46,21 +58,22 @@ const getUserById = (req, res) => {
             })
         }
         res.status(200).json({
-            success: true,
+            success: 200,
             message: 'Successfully',
-            data: result.rows,
+            data: result.rows[0],
         })
+
     })
 }
 const createUser = (req, res) => {
-    const { name, phone } = req.body;
-    pool.query(userService.createUser, [name, phone], (err, result) => {
+    const { username, phone } = req.body;
+    pool.query(userService.createUser, [username, phone], (err, result) => {
         if (err) throw err;
         res.status(200).json({
             success: true,
             message: 'Created user successfully!',
             data: {
-                name: result.rows[0].name,
+                name: result.rows[0].username,
                 phone: result.rows[0].phone,
             }
         })
@@ -68,8 +81,8 @@ const createUser = (req, res) => {
 }
 const updateUser = (req, res) => {
     const id = parseInt(req.params.id);
-    const { name, phone } = req.body;
-    pool.query(userService.updateUser, [id, name, phone], (err, result) => {
+    const { username, phone } = req.body;
+    pool.query(userService.updateUser, [id, username, phone], (err, result) => {
         if (err) throw err;
         if (result.rows.length === 0) {
             res.status(404).json({
