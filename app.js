@@ -14,7 +14,7 @@ const createProducingTable = require('./src/models/producting');
 createEmployeeTable().then(r => console.log(r));
 createUserTable().then(r => console.log(r));
 createProductsTable().then(r => console.log(r));
-createProducingTable().then(r => console.log(r));
+// createProducingTable().then(r => console.log(r));
 
 
 const app = express();

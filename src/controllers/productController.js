@@ -6,12 +6,15 @@ const getAllProducts = (req, res) => {
     const limit = parseInt(req.query.limit);
     const start = (page - 1) * limit;
     const end = page * limit;
+
+
     pool.query(productService.getAllProducts, (err, result) => {
         const resultProduct = result.rows.slice(start, end);
         const totalElements = result.rows.length;
         const totalPages = Math.ceil(totalElements / limit);
         const prevPage = page > 1 ? page - 1 : null;
         const nextPage = page < totalPages ? page + 1 : null;
+
         const response = {
             success: true,
             message: 'Successfully',
@@ -54,7 +57,7 @@ const getProductById = (req, res) => {
 }
 
 const createProduct = (req, res) => {
-    const {name, description, price, quantity} = req.body;
+    const { name, description, price, quantity } = req.body;
     pool.query(productService.createProduct, [name, description, price, quantity], (err, result) => {
         if (err) throw err;
         res.status(200).json({
@@ -67,7 +70,7 @@ const createProduct = (req, res) => {
 
 const updateProduct = (req, res) => {
     const id = parseInt(req.params.id);
-    const {name, description, price, quantity} = req.body;
+    const { name, description, price, quantity } = req.body;
     pool.query(productService.updateProduct, [id, name, description, price, quantity], (err, result) => {
         if (err) throw err;
         if (result.rows.length === 0) {

@@ -94,7 +94,7 @@ const updateUser = (req, res) => {
             success: true,
             message: 'Updated user successfully!',
             data: {
-                name: result.rows[0].name,
+                name: result.rows[0].username,
                 phone: result.rows[0].phone,
             }
         })
